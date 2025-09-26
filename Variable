@@ -1,0 +1,36 @@
+.model small
+.stack 100h
+.data
+
+msg db 3   //initilized variable
+msg1 db ?  //to take input from user
+.code
+main proc  
+    mov ax,@data  //data segment initialize
+    mov ds,ax
+                
+                
+    mov ah,2
+    add msg,48   //convert number to ASCII
+    mov dl,msg   //print msg
+    int 21h 
+    
+    mov ah,1   //input function
+    int 21h
+    mov msg1,al
+    
+    mov ah,2
+    mov dl,10
+    int 21h         //new line + carriage return
+    mov dl,13
+    int 21h
+    
+    mov ah,2
+    mov dl,msg1     //print msg1
+    int 21h  
+    
+    exit:
+    mov ah,4ch
+    int 21h
+    main endp
+end main
